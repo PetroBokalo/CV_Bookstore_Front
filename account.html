@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Page</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>My Account</h1>
+    </header>
+    <main>
+        <section>
+            <h2>Account Details</h2>
+            <p id="accountData">Loading...</p>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2023 BookStore</p>
+    </footer>
+
+    <script>
+        // Викликаємо бекенд
+        fetch("http://localhost:5270/api/account")
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("accountData").innerText = data;
+            })
+            .catch(error => {
+                document.getElementById("accountData").innerText = "Error: " + error;
+            });
+    </script>
+</body>
+</html>

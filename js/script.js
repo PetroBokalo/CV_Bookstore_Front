@@ -135,6 +135,36 @@
       // mobileMode: false,
     });
 
+
+    // =============================
+    // Toggle between Sign in / Sign up
+    // =============================
+
+    const showSignUp = document.getElementById('showSignup');
+    const showSignIn = document.getElementById('showSignin');
+
+    if(showSignUp && showSignIn) 
+    {
+      showSignUp.addEventListener('click', function(e) {
+        e.preventDefault();
+        var signin = document.getElementById('signin');
+        var signup = document.getElementById('signup');
+        signin.classList.remove("show", "active");
+        signup.classList.add("show", "active");
+      });
+
+      showSignIn.addEventListener('click', function(e) {
+        e.preventDefault();
+        var signin = document.getElementById('signin');
+        var signup = document.getElementById('signup');
+        signup.classList.remove("show", "active");
+        signin.classList.add("show", "active");
+      });
+
+    }
+
+
+
   }); // End of a document
 
 

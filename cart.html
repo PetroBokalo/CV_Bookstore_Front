@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Page</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>My Cart</h1>
+    </header>
+    <main>
+        <section>
+            <h2>Cart Details</h2>
+            <p id="cartData">Loading...</p>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2023 BookStore</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const data = sessionStorage.getItem('userEmail');
+            const container = document.getElementById('cartData');
+            if (data) {
+                container.textContent = data;
+                sessionStorage.removeItem('userEmail'); // Clear after displaying
+            } else {
+                container.textContent = 'No cart data found.';
+            }
+        });
+    </script>
+</body>
+</html>

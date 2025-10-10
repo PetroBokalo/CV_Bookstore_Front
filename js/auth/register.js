@@ -1,3 +1,5 @@
+import { setToken } from "../api.js";
+
 document.getElementById("signupForm").addEventListener("submit", async function (event) {
     event.preventDefault(); // блокує стандартне оновлення сторінки
 
@@ -21,14 +23,18 @@ document.getElementById("signupForm").addEventListener("submit", async function 
         const response = await fetch("https://localhost:7012/api/Auth/register", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(data)
+            body: JSON.stringify(data),
+            credentials: 'include' // Додає кукі до запиту
         });
 
         const result = await response.json();
 
+               
         if (response.ok) {
             alert(result.message);
             console.log(result);
+            setToken(result.data.accessToken);
+
         } else {
             alert(result.message || "Registration failed");
             console.error(result);

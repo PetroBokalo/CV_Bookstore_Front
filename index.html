@@ -56,7 +56,7 @@
 						<a href="#accountPanel" class="user-account for-buy" data-bs-toggle="offcanvas" role ="button" aria-controls="accountPanel">
 							<i class="icon icon-user"></i><span>Account</span>
 						</a>
-						<a href="#" class="cart for-buy"><i class="icon icon-clipboard"></i><span>Cart:(0 $)</span></a>
+						<a href="#" id="loadCart" class="cart for-buy"><i class="icon icon-clipboard"></i><span>Cart:(0 $)</span></a>
 					</div>
 				</div>
 
@@ -1049,7 +1049,7 @@
       <!-- Sign in -->
       <div class="tab-pane fade show active" id="signin" role="tabpanel">
         <h4 class="mb-3">Sign in</h4>
-        <form>
+        <form id="signinForm">
           <div class="mb-3">
             <label for="signinEmail" class="form-label">Email</label>
             <input type="email" class="form-control" id="signinEmail" placeholder="Enter your email">
@@ -1125,7 +1125,10 @@
 		crossorigin="anonymous"></script>
 	<script src="js/plugins.js"></script>
 	<script src="js/script.js"></script>
-	<script src="js/auth/register.js"></script>
+	<script type="module" src="js/auth/register.js"></script>
+	<script type="module" src="js/auth/login.js"></script>
+	<script type="module" src="js/cart.js"></script>
+
 
 </body>
 

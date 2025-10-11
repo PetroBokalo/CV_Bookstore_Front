@@ -26,17 +26,17 @@ document.getElementById("signupForm").addEventListener("submit", async function 
             body: JSON.stringify(data),
             credentials: 'include' // Додає кукі до запиту
         });
-
+ 
         const result = await response.json();
 
                
         if (response.ok) {
-            alert(result.message);
+            alert("Registration successful!");
             console.log(result);
-            setToken(result.data.accessToken);
+            setToken(result.accessToken);
 
         } else {
-            alert(result.message || "Registration failed");
+            alert(result.message);
             console.error(result);
         }
     } catch (error) {

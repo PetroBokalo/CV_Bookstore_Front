@@ -1,3 +1,10 @@
+
+const API_BASE_URL = "https://localhost:7012/api";
+
+export function getBaseUrl() {
+    return API_BASE_URL;
+}
+
 let accessToken = null;
 
 export function setToken(access) {
@@ -10,8 +17,10 @@ export function getToken() {
     return accessToken;
 }
 
-export async function apiFetch (url, options = {}) 
+export async function apiFetch (endpoint, options = {}) 
 {
+    const url = `${API_BASE_URL}${endpoint}`;
+
     if (!options.headers) options.headers = {};
     if (accessToken) 
     {
@@ -21,7 +30,7 @@ export async function apiFetch (url, options = {})
     let response = await fetch(url, options);
 
     if(response.status === 401){
-        const refreshResponse = await fetch("https://localhost:7012/api/Auth/refresh", {
+        const refreshResponse = await fetch(`${API_BASE_URL}/Auth/refresh`, {
             method: "POST",
             credentials: 'include' // Додає кукі до запиту
     });

@@ -1,4 +1,7 @@
 import { setToken } from "../api.js";
+import { getBaseUrl } from "../api.js";
+
+const baseUrl = getBaseUrl();
 
 document.getElementById("signupForm").addEventListener("submit", async function (event) {
     event.preventDefault(); // блокує стандартне оновлення сторінки
@@ -20,7 +23,7 @@ document.getElementById("signupForm").addEventListener("submit", async function 
     };
 
     try {
-        const response = await fetch("https://localhost:7012/api/Auth/register", {
+        const response = await fetch(`${baseUrl}/Auth/register`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data),

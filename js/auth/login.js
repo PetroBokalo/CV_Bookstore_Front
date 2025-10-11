@@ -1,4 +1,7 @@
 import { setToken } from "../api.js"; 
+import { getBaseUrl } from "../api.js";
+
+const baseUrl = getBaseUrl();
 
 document.getElementById("signinForm").addEventListener("submit", async function (event) 
 {
@@ -14,7 +17,7 @@ document.getElementById("signinForm").addEventListener("submit", async function 
 
     try {
 
-        const response = await fetch("https://localhost:7012/api/Auth/login",{
+        const response = await fetch(`${baseUrl}/Auth/login`,{
             method: "POST",
             headers: {"content-type": "application/json"},
             body: JSON.stringify(data),

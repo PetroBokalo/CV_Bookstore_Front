@@ -9,7 +9,7 @@ document.getElementById("loadCart").addEventListener("click", async function () 
     try {
 
         const token = getToken();
-        const response = await apiFetch("https://localhost:7012/api/Cart/temp", {
+        const response = await apiFetch("/Cart/temp", {
             method: "GET",
             headers: { 
                 "Content-Type": "application/json",

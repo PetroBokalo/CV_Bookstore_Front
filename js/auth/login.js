@@ -30,6 +30,12 @@ document.getElementById("signinForm").addEventListener("submit", async function 
             alert("Login successful");
             console.log(result);
             setToken(result.accessToken);
+        }else if (response.status === 403 && result.userId != null){
+            console.log(result);
+            sessionStorage.setItem("id", result.userId);
+            sessionStorage.setItem("email", result.userEmail);
+            
+            window.location.href = "verify.html";
         }
         else{
             alert("Login failed");

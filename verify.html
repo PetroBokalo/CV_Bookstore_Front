@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Підтвердження коду</title>
+</head>
+<body>
+    <h2>Підтвердження електронної пошти</h2>
+    <p>Ми надіслали код підтвердження на адресу: <strong id="userEmail"></strong></p>
+
+    <form id="verifyForm">
+        <label for="code">Введіть код підтвердження:</label><br>
+        <input type="text" id="code" name="code" maxlength="6" required><br><br>
+
+        <button type="submit">Підтвердити</button>
+    </form>
+
+    <p>Не отримали код? <a href="#" id="resendCode">Надіслати ще раз</a></p>
+
+    <script type="module" src="js/auth/verify.js"></script>
+
+</body>
+</html>

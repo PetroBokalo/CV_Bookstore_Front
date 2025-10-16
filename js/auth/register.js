@@ -1,4 +1,4 @@
-import { setToken } from "../api.js";
+
 import { getBaseUrl } from "../api.js";
 
 const baseUrl = getBaseUrl();
@@ -27,7 +27,7 @@ document.getElementById("signupForm").addEventListener("submit", async function 
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data),
-            credentials: 'include' // Додає кукі до запиту
+            credentials: 'include' 
         });
  
         const result = await response.json();
@@ -36,7 +36,10 @@ document.getElementById("signupForm").addEventListener("submit", async function 
         if (response.ok) {
             alert("Registration successful!");
             console.log(result);
-            setToken(result.accessToken);
+            sessionStorage.setItem("id", result.userId);
+            sessionStorage.setItem("email", result.userEmail);
+
+            window.location.href = "verify.html";
 
         } else {
             alert(result.message);

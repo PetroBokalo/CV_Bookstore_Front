@@ -23,7 +23,13 @@ document.getElementById("loadCart").addEventListener("click", async function () 
 
             sessionStorage.setItem("userEmail", data.email); // зберігаємо в sessionStorage
             console.log("Loggined at:", data.email);
-            window.location.href = "cart.html"; // перенаправляємо в новому вікні
+
+            console.log("Redirecting to cart.html in 2 seconds...");
+            
+            setTimeout(() => {
+                window.location.href = "cart.html"; // перенаправляємо в новому вікні
+            }, 2000); // затримка 2 секунди
+
         } else if (response.status === 401) {
             alert("Unauthorized. Please log in.");
         }

@@ -8,12 +8,15 @@ export function getBaseUrl() {
 let accessToken = null;
 
 export function setToken(access) {
-  accessToken = access;
 
-   console.log("✅ Token set:", { accessToken });
+    sessionStorage.setItem("accessToken", access);
+    accessToken = access;
+
+    console.log("✅ Token set:", { accessToken });
 }
 
 export function getToken() {
+    accessToken = sessionStorage.getItem("accessToken");
     return accessToken;
 }
 
@@ -22,6 +25,7 @@ export async function apiFetch (endpoint, options = {})
     const url = `${API_BASE_URL}${endpoint}`;
 
     if (!options.headers) options.headers = {};
+    if (!accessToken) accessToken = sessionStorage.getItem("accessToken");
     if (accessToken) 
     {
         options.headers['Authorization'] = `Bearer ${accessToken}`;
@@ -40,12 +44,14 @@ export async function apiFetch (endpoint, options = {})
     if(refreshResponse.ok){
         console.log("✅ Token refreshed:", refreshData);
         setToken(refreshData.accessToken);
+        accessToken = refreshData.accessToken;
         options.headers['Authorization'] = `Bearer ${accessToken}`;
         response = await fetch(url, options);
     }
     else{
         console.warn("Refresh token invalid or expired");
         console.error(refreshData);
+        sessionStorage.removeItem("accessToken");
     }
 
     }

@@ -123,6 +123,12 @@ document.addEventListener("DOMContentLoaded", () =>  {
                 credentials: 'include' // Додає кукі до запиту
             });
 
+            if (response.status === 204) {
+                alert("Код підтвердження надіслано повторно.");
+                startCooldown(cooldown);
+                return;
+            }
+
             const result = await response.json();
 
             if (response.ok) {

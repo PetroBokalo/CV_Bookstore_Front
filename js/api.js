@@ -58,3 +58,30 @@ export async function apiFetch (endpoint, options = {})
     
     return response;
 }
+
+export async function GetUserData() {
+    try {
+        const token = getToken();
+
+        const response = await apiFetch("/Auth/me", {
+            method: "GET",
+            headers: { 
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                }
+        });
+
+        var result = await response.json();
+
+        if (response.ok) {
+            console.log("User data retrieved:", result);
+            // store user data
+        } else {
+            console.error("Error retrieving user data:", result);
+        }
+
+    }
+    catch (error) {
+        console.error("Get user data error:", error);
+    }
+}

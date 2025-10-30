@@ -1,4 +1,4 @@
-import { getBaseUrl } from "../api.js";
+import { getBaseUrl } from "../api/api.js";
 
 const baseUrl = getBaseUrl();
 
@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
     form.addEventListener("submit", async (event) => {
         event.preventDefault();
 
-        const userURI = window.location.origin + "/reset-password.html";
+        const userURI = window.location.origin + "/pages/auth/reset-password.html";
         const email = document.getElementById("email").value;
         if (!email) {
             alert("Input your email address.");

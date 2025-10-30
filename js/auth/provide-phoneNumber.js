@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", () =>  {
                 alert("Phone number provided successfully!");
                 console.log("Phone number provided");
 
-                window.location.href = "index.html";
+                window.location.href = "../../index.html";
             }
 
         }

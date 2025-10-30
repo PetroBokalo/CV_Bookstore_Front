@@ -1,11 +1,20 @@
-import { getBaseUrl } from "../../api.js";
+import { getBaseUrl } from "../../api/api.js";
 
-const baseUrl = getBaseUrl();
+document.addEventListener("DOMContentLoaded", () => {
+  const baseUrl = getBaseUrl();
 
-document.getElementById("googleSignInBtn").addEventListener("click", () => {
-   window.location.href = `${baseUrl}/Auth/google`;
-});
+  const googleSignInBtn = document.getElementById("googleSignInBtn");
+  const googleSignUpBtn = document.getElementById("googleSignUpBtn");
 
-document.getElementById("googleSignUpBtn").addEventListener("click", () => {
-   window.location.href = `${baseUrl}/Auth/google`;
+  if (googleSignInBtn) {
+    googleSignInBtn.addEventListener("click", () => {
+      window.location.href = `${baseUrl}/Auth/google`;
+    });
+  }
+
+  if (googleSignUpBtn) {
+    googleSignUpBtn.addEventListener("click", () => {
+      window.location.href = `${baseUrl}/Auth/google`;
+    });
+  }
 });

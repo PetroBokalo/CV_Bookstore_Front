@@ -32,7 +32,7 @@
 					<div class="col-md-4">
 						<div class="social-links">
 							<ul>
-								<li><a href="#"><i class="icon icon-facebook"></i></a></li>
+								<li><a href="#" id="icon-facebook"><i class="icon icon-facebook"></i></a></li>
 								<li><a href="#"><i class="icon icon-twitter"></i></a></li>
 								<li><a href="#"><i class="icon icon-youtube-play"></i></a></li>
 								<li><a href="#"><i class="icon icon-behance-square"></i></a></li>
@@ -53,7 +53,7 @@
 						</div>
 					</div>
 					<div class="col-md-4 text-end">
-						<a href="#accountPanel" class="user-account for-buy" data-bs-toggle="offcanvas" role ="button" aria-controls="accountPanel">
+						<a id="accountButton" class="user-account for-buy" data-bs-toggle="offcanvas" role ="button" aria-controls="accountPanel">
 							<i class="icon icon-user"></i><span>Account</span>
 						</a>
 						<a href="#" id="loadCart" class="cart for-buy"><i class="icon icon-clipboard"></i><span>Cart:(0 $)</span></a>
@@ -1063,7 +1063,7 @@
               <input class="form-check-input" type="checkbox" id="rememberMe">
               <label class="form-check-label" for="rememberMe">Remember me</label>
             </div>
-            <a href="forgot-password.html" class="text-decoration-none">Forgot password?</a>
+            <a href="pages/auth/forgot-password.html" class="text-decoration-none">Forgot password?</a>
           </div>
           <button type="submit" class="btn btn-primary w-100 mb-2">Sign in</button>
           <button id="googleSignInBtn" type="button" class="btn btn-outline-danger w-100 mb-3">
@@ -1125,10 +1125,10 @@
 		crossorigin="anonymous"></script>
 	<script src="js/plugins.js"></script>
 	<script src="js/script.js"></script>
-	<script type="module" src="js/auth/register.js"></script>
-	<script type="module" src="js/auth/login.js"></script>
-	<script type="module" src="js/cart.js"></script>
-	<script type="module" src="js/auth/google/google-redirect.js"></script>
+	<script type="module" src="js/user/cart.js"></script>
+	<script type="module" src="js/auth/logout.js"></script>
+	<script type="module" src="js/auth/account.js"></script>
+
 
 
 </body>

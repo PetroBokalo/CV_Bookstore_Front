@@ -1,5 +1,5 @@
 
-import { getBaseUrl } from "../api.js";
+import { getBaseUrl } from "../api/api.js";
 
 const baseUrl = getBaseUrl();
 
@@ -39,7 +39,7 @@ document.getElementById("signupForm").addEventListener("submit", async function 
             sessionStorage.setItem("id", result.userId);
             sessionStorage.setItem("email", result.userEmail);
 
-            window.location.href = "verify.html";
+            window.location.href = "/pages/auth/verify.html";
 
         } else {
             alert(result.message);

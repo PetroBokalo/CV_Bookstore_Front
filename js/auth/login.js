@@ -1,5 +1,5 @@
-import { setToken } from "../api.js"; 
-import { getBaseUrl } from "../api.js";
+import { setToken } from "../api/api.js"; 
+import { getBaseUrl } from "../api/api.js";
 
 const baseUrl = getBaseUrl();
 
@@ -29,13 +29,13 @@ document.getElementById("signinForm").addEventListener("submit", async function 
         if (response.ok){          
             alert("Login successful");
             console.log(result);
-            setToken(result.accessToken);
-        }else if (response.status === 403 && result.userId != null){
+            setToken(result.data.accessToken);
+        }else if (response.status === 403 && result.data.userId != null){
             console.log(result);
-            sessionStorage.setItem("id", result.userId);
-            sessionStorage.setItem("email", result.userEmail);
-            
-            window.location.href = "verify.html";
+            sessionStorage.setItem("id", result.data.userId);
+            sessionStorage.setItem("email", result.data.email);
+
+            window.location.href = "/pages/auth/verify.html";
         }
         else{
             alert("Login failed");

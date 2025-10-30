@@ -11,19 +11,6 @@ export function getBaseUrl() {
 }
 
 
-// export function setToken(access) {
-
-//     sessionStorage.setItem("accessToken", access);
-//     accessToken = access;
-
-//     console.log("✅ Token set:", { accessToken });
-// }
-
-// export function getToken() {
-//     accessToken = sessionStorage.getItem("accessToken");
-//     return accessToken;
-// }
-
 export async function apiFetch (endpoint, options = {}) 
 {
     const url = `${API_BASE_URL}${endpoint}`;
@@ -72,30 +59,3 @@ export async function apiFetch (endpoint, options = {})
 
     
 }
-
-// export async function GetUserData() {
-//     try {
-//         const token = getToken();
-
-//         const response = await apiFetch("/Auth/me", {
-//             method: "GET",
-//             headers: { 
-//                     "Content-Type": "application/json",
-//                     "Authorization": `Bearer ${token}`
-//                 }
-//         });
-
-//         var result = await response.json();
-
-//         if (response.ok) {
-//             console.log("User data retrieved:", result);
-//             // store user data
-//         } else {
-//             console.error("Error retrieving user data:", result);
-//         }
-
-//     }
-//     catch (error) {
-//         console.error("Get user data error:", error);
-//     }
-// }

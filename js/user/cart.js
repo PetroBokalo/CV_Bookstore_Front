@@ -1,5 +1,4 @@
 import { apiFetch } from "/js/api/api.js";
-import { getToken } from "/js/utils/accessTokenHandler.js";
 
 
 document.addEventListener("DOMContentLoaded", () =>  {
@@ -8,12 +7,10 @@ document.getElementById("loadCart").addEventListener("click", async function () 
 
     try {
 
-        const token = getToken();
         const response = await apiFetch("/Cart/temp", {
             method: "GET",
             headers: { 
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${token}`
             }
         });
 

@@ -1,4 +1,4 @@
-import { getToken } from "/js/api/api.js";
+import { getToken } from "/js/utils/accessTokenHandler.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   const accountBtn = document.getElementById("accountButton");

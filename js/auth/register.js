@@ -1,5 +1,5 @@
 
-import { getBaseUrl } from "../api/api.js";
+import { getBaseUrl } from "/js/api/api.js";
 
 const baseUrl = getBaseUrl();
 

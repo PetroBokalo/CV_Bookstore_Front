@@ -1,87 +1,101 @@
 
+import { getToken } from "/js/utils/accessTokenHandler.js";
+import { setToken } from "/js/utils/accessTokenHandler.js";
+import { removeToken } from "/js/utils/accessTokenHandler.js";
+
+
 const API_BASE_URL = "https://localhost:7012/api";
 
 export function getBaseUrl() {
     return API_BASE_URL;
 }
 
-let accessToken = null;
 
-export function setToken(access) {
+// export function setToken(access) {
 
-    sessionStorage.setItem("accessToken", access);
-    accessToken = access;
+//     sessionStorage.setItem("accessToken", access);
+//     accessToken = access;
 
-    console.log("✅ Token set:", { accessToken });
-}
+//     console.log("✅ Token set:", { accessToken });
+// }
 
-export function getToken() {
-    accessToken = sessionStorage.getItem("accessToken");
-    return accessToken;
-}
+// export function getToken() {
+//     accessToken = sessionStorage.getItem("accessToken");
+//     return accessToken;
+// }
 
 export async function apiFetch (endpoint, options = {}) 
 {
     const url = `${API_BASE_URL}${endpoint}`;
+    let accessToken = getToken();
 
     if (!options.headers) options.headers = {};
-    if (!accessToken) accessToken = sessionStorage.getItem("accessToken");
     if (accessToken) 
     {
         options.headers['Authorization'] = `Bearer ${accessToken}`;
     }
 
-    let response = await fetch(url, options);
+    try{
+        let response = await fetch(url, options);
 
-    if(response.status === 401){
-        const refreshResponse = await fetch(`${API_BASE_URL}/Auth/refresh`, {
-            method: "POST",
-            credentials: 'include' // Додає кукі до запиту
-    });
+        if (response.status === 401){
 
-    const refreshData = await refreshResponse.json();
+            const refreshResponse = await fetch(`${API_BASE_URL}/Auth/refresh`, {
+                method: "POST",
+                credentials: 'include' // Додає кукі до запиту
+            });
 
-    if(refreshResponse.ok){
-        console.log("✅ Token refreshed:", refreshData);
-        setToken(refreshData.accessToken);
-        accessToken = refreshData.accessToken;
-        options.headers['Authorization'] = `Bearer ${accessToken}`;
-        response = await fetch(url, options);
-    }
-    else{
-        console.warn("Refresh token invalid or expired");
-        console.error(refreshData);
-        sessionStorage.removeItem("accessToken");
-    }
+            const refreshData = await refreshResponse.json();
 
-    }
-    
-    return response;
-}
+            if (refreshResponse.ok){
 
-export async function GetUserData() {
-    try {
-        const token = getToken();
+                console.log("✅ Token refreshed:", refreshData);
+                setToken(refreshData.accessToken);
+                accessToken = getToken();
+                options.headers['Authorization'] = `Bearer ${accessToken}`;
+                response = await fetch(url, options);
+            }
+            else{
+                
+                console.warn("Refresh token invalid or expired");
+                console.error(refreshData);
+                removeToken();
+            }
 
-        const response = await apiFetch("/Auth/me", {
-            method: "GET",
-            headers: { 
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${token}`
-                }
-        });
-
-        var result = await response.json();
-
-        if (response.ok) {
-            console.log("User data retrieved:", result);
-            // store user data
-        } else {
-            console.error("Error retrieving user data:", result);
         }
+        
+        return response;
+    }
+    catch (error){
+        console.error("Fetch error:", error);
+    }
 
-    }
-    catch (error) {
-        console.error("Get user data error:", error);
-    }
+    
 }
+
+// export async function GetUserData() {
+//     try {
+//         const token = getToken();
+
+//         const response = await apiFetch("/Auth/me", {
+//             method: "GET",
+//             headers: { 
+//                     "Content-Type": "application/json",
+//                     "Authorization": `Bearer ${token}`
+//                 }
+//         });
+
+//         var result = await response.json();
+
+//         if (response.ok) {
+//             console.log("User data retrieved:", result);
+//             // store user data
+//         } else {
+//             console.error("Error retrieving user data:", result);
+//         }
+
+//     }
+//     catch (error) {
+//         console.error("Get user data error:", error);
+//     }
+// }

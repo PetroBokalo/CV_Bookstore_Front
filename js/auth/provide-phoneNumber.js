@@ -1,6 +1,6 @@
 
-import { apiFetch } from "../api.js";
-import { setToken } from "../api.js";
+import { apiFetch } from "/js/api/api.js";
+import { setToken } from "/js/utils/accessTokenHandler.js";
 
 
 document.addEventListener("DOMContentLoaded", () =>  {
@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", () =>  {
                 alert("Phone number provided successfully!");
                 console.log("Phone number provided");
 
-                window.location.href = "../../index.html";
+                window.location.href = "/index.html";
             }
 
         }

@@ -1,4 +1,4 @@
-import { setToken } from "../api/api.js";
+import { setToken } from "/js/utils/accessTokenHandler.js";
 
 document.addEventListener("DOMContentLoaded", () => {
     const hash = window.location.hash;

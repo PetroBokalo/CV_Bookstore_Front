@@ -1,5 +1,5 @@
-import { setToken } from "../api/api.js";
-import { getBaseUrl } from "../api/api.js";
+import { setToken } from "/js/utils/accessTokenHandler.js";
+import { getBaseUrl } from "/js/api/api.js";
 
 const baseUrl = getBaseUrl();
 
@@ -92,7 +92,7 @@ document.addEventListener("DOMContentLoaded", () =>  {
                 sessionStorage.removeItem("id");
                 sessionStorage.removeItem("email");
 
-                window.location.href = "../../index.html";
+                window.location.href = "/index.html";
             }
             else {
                 alert(result.message || "Verification failed");

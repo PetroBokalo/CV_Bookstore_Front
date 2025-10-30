@@ -1,5 +1,5 @@
-import { setToken } from "../api/api.js"; 
-import { getBaseUrl } from "../api/api.js";
+import { setToken } from "/js/utils/accessTokenHandler.js";
+import { getBaseUrl } from "/js/api/api.js";
 
 const baseUrl = getBaseUrl();
 
@@ -29,7 +29,12 @@ document.getElementById("signinForm").addEventListener("submit", async function 
         if (response.ok){          
             alert("Login successful");
             console.log(result);
-            setToken(result.data.accessToken);
+            //setToken(result.data.accessToken);
+            setToken(result.accessToken);
+
+            // TODO:return to previous page
+            window.location.href = "/index.html";
+
         }else if (response.status === 403 && result.data.userId != null){
             console.log(result);
             sessionStorage.setItem("id", result.data.userId);

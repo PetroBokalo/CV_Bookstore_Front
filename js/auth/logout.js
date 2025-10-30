@@ -1,6 +1,6 @@
-import { getBaseUrl } from "../api/api.js";
-import { apiFetch } from "../api/api.js";
-const baseUrl = getBaseUrl();
+
+import { apiFetch } from "/js/api/api.js";
+import { removeToken } from "/js/utils/accessTokenHandler.js";
 
 document.addEventListener("DOMContentLoaded", () => {
     const logoutButton = document.getElementById("icon-facebook");
@@ -13,12 +13,14 @@ document.addEventListener("DOMContentLoaded", () => {
            });
            if (response.ok) {
                //window.location.href = "../../index.html";
-                sessionStorage.removeItem("accessToken");
+                removeToken();
                 console.log("✅ Logged out successfully");
-           } else {
+           } 
+           else {
                console.error("Logout failed");
            }
-       } catch (error) {
+       } 
+       catch (error) {
            console.error("Error:", error);
        }
    });

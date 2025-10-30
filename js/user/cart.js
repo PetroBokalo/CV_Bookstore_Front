@@ -1,5 +1,5 @@
-import { apiFetch } from "../api/api.js";
-import { getToken } from "../api/api.js";
+import { apiFetch } from "/js/api/api.js";
+import { getToken } from "/js/utils/accessTokenHandler.js";
 
 
 document.addEventListener("DOMContentLoaded", () =>  {
@@ -27,7 +27,7 @@ document.getElementById("loadCart").addEventListener("click", async function () 
             console.log("Redirecting to cart.html in 2 seconds...");
             
             setTimeout(() => {
-                window.location.href = "pages/user/cart.html"; // перенаправляємо в новому вікні
+                window.location.href = "/pages/user/cart.html"; // перенаправляємо в новому вікні
             }, 2000); // затримка 2 секунди
 
         } else if (response.status === 401) {

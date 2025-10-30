@@ -1,4 +1,4 @@
-import { getBaseUrl } from "../../api/api.js";
+import { getBaseUrl } from "/js/api/api.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   const baseUrl = getBaseUrl();

@@ -25,7 +25,7 @@ export async function apiFetch (endpoint, options = {})
     try{
         let response = await fetch(url, options);
 
-        if (response.status === 401){
+        if (response.status === 401 || response.status === 403){
 
             const refreshResponse = await fetch(`${API_BASE_URL}/Auth/refresh`, {
                 method: "POST",
@@ -41,12 +41,14 @@ export async function apiFetch (endpoint, options = {})
                 accessToken = getToken();
                 options.headers['Authorization'] = `Bearer ${accessToken}`;
                 response = await fetch(url, options);
-            }
-            else{
-                
+            } else if (refreshResponse.status === 401){
                 console.warn("Refresh token invalid or expired");
                 console.error(refreshData);
                 removeToken();
+            } else {
+                console.warn("Server did not refresh token successfully");
+                console.error(refreshData);
+
             }
 
         }

@@ -1,7 +1,5 @@
-import { setToken } from "/js/utils/accessTokenHandler.js";
-import { getBaseUrl } from "/js/api/api.js";
 
-const baseUrl = getBaseUrl();
+import { apiFetch } from "/js/api/api.js";
 
 document.addEventListener("DOMContentLoaded", () =>  {
 
@@ -9,7 +7,6 @@ document.addEventListener("DOMContentLoaded", () =>  {
     const form = document.getElementById("verifyForm");
     const resendLink = document.getElementById("resendCode");
 
-    const userId = sessionStorage.getItem("id");
     const userEmail = sessionStorage.getItem("email");
 
     if (!userEmail) {
@@ -75,26 +72,30 @@ document.addEventListener("DOMContentLoaded", () =>  {
 
         try {
 
-            const response = await fetch(`${baseUrl}/Auth/verify`, {
+            const response = await apiFetch("/Auth/verify", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ UserId: userId, code: code }),
+                body: JSON.stringify({ code: code }),
                 credentials: 'include' // Додає кукі до запиту
             });
 
-            const result = await response.json();
 
             if (response.ok) {           
                 alert("Email verified successfully!");
-                console.log(result);
-                setToken(result.accessToken);
+                console.log(response);
 
                 sessionStorage.removeItem("id");
                 sessionStorage.removeItem("email");
 
                 window.location.href = "/index.html";
+            } else if (response.status === 401 ) {
+
+                console.warn("Unauthorized access - need login.");
+
+                window.location.href = "/pages/auth/login.html";
             }
             else {
+                const result = await response.json();
                 alert(result.message || "Verification failed");
                 console.log(result);
             }
@@ -104,22 +105,18 @@ document.addEventListener("DOMContentLoaded", () =>  {
             alert("Server error");
         }
 
-
-
-
     });
 
 
     resendLink.addEventListener("click", async (event) => {
         event.preventDefault();
 
-        if(resendLink.style.pointerEvents === 'none') return;
+        if (resendLink.style.pointerEvents === 'none') return;
 
         try {
-            const response = await fetch(`${baseUrl}/Auth/resend`, {
+            const response = await apiFetch("/Auth/resend", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ UserId: parseInt(userId) }),
                 credentials: 'include' // Додає кукі до запиту
             });
 
@@ -127,20 +124,15 @@ document.addEventListener("DOMContentLoaded", () =>  {
                 alert("Код підтвердження надіслано повторно.");
                 startCooldown(cooldown);
                 return;
-            }
-
-            const result = await response.json();
-
-            if (response.ok) {
-                alert("Код підтвердження надіслано повторно.");
-                console.log(result);
-                 //emailElement.textContent = userId + "-" + result.code;
-                startCooldown(cooldown);
             } else {
+                const result = await response.json();
                 alert(result.message || "Не вдалося надіслати код.");
                 console.log(result);
             }
-        } catch (error) {
+
+
+        } 
+        catch (error) {
             console.error("Error:", error);
             alert("Server error");
         }

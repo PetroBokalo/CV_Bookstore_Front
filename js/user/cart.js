@@ -29,8 +29,9 @@ document.getElementById("loadCart").addEventListener("click", async function () 
 
         } else if (response.status === 401) {
             alert("Unauthorized. Please log in.");
-        }
-        else {
+        } else if (response.status === 403) {
+            alert("Not verified. Please verify your email.");
+        } else {
             const err = await response.text();
             alert("Error: " + err);
             console.error(err);

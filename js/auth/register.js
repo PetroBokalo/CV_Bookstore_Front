@@ -1,4 +1,5 @@
 
+import { setToken } from "/js/utils/accessTokenHandler.js";
 import { getBaseUrl } from "/js/api/api.js";
 
 const baseUrl = getBaseUrl();
@@ -35,11 +36,11 @@ document.getElementById("signupForm").addEventListener("submit", async function 
                
         if (response.ok) {
             alert("Registration successful!");
+            setToken(result.accessToken);
             console.log(result);
-            sessionStorage.setItem("id", result.userId);
             sessionStorage.setItem("email", result.userEmail);
 
-            window.location.href = "/pages/auth/verify.html";
+           window.location.href = "/pages/auth/verify.html";
 
         } else {
             alert(result.message);

@@ -29,15 +29,13 @@ document.getElementById("signinForm").addEventListener("submit", async function 
         if (response.ok){          
             alert("Login successful");
             console.log(result);
-            //setToken(result.data.accessToken);
             setToken(result.accessToken);
 
             // TODO:return to previous page
             window.location.href = "/index.html";
 
-        }else if (response.status === 403 && result.data.userId != null){
+        }else if (response.status === 403){
             console.log(result);
-            sessionStorage.setItem("id", result.data.userId);
             sessionStorage.setItem("email", result.data.email);
 
             window.location.href = "/pages/auth/verify.html";

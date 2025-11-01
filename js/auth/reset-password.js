@@ -34,7 +34,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 headers: { "content-type": "application/json" },
                 body: JSON.stringify({ email, token, password })
             });
-
         
             if (response.ok) {
                 alert("Password reset successfully!");

@@ -10,7 +10,8 @@ document.addEventListener("DOMContentLoaded", () =>  {
     const userEmail = sessionStorage.getItem("email");
 
     if (!userEmail) {
-        emailElement.textContent = "(Пошти не знайдено)"
+        emailElement.textContent = "(No email found)";
+        console.warn("No email found in sessionStorage.");
     }
 
     emailElement.textContent = userEmail;
@@ -25,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () =>  {
         resendLink.style.color = 'gray';
 
         let timeLeft = seconds;    
-        resendLink.textContent = `Повторно можна через ${timeLeft}c`;
+        resendLink.textContent = `Resent again in ${timeLeft}s`;
 
         const timerExpiry = Date.now() + timeLeft * 1000;
         sessionStorage.setItem("cooldownExpiry", timerExpiry);
@@ -37,13 +38,13 @@ document.addEventListener("DOMContentLoaded", () =>  {
 
             if (remainingTime > 0) {
                 timeLeft = remainingTime;
-                resendLink.textContent = `Повторно можна через ${timeLeft}c`;
+                resendLink.textContent = `Resent again in ${timeLeft}s`;
             }
                
             else {
                 clearInterval(timer);
                 sessionStorage.removeItem("cooldownExpiry");
-                resendLink.textContent = "Надіслати ще раз";
+                resendLink.textContent = "Resend";
                 resendLink.style.pointerEvents = "auto";
                 resendLink.style.color = "";
             }
@@ -66,7 +67,7 @@ document.addEventListener("DOMContentLoaded", () =>  {
         const code = document.getElementById("code").value;
 
         if (!code) {
-            alert("Будь ласка, введіть код підтвердження.");
+            alert("Please enter the verification code.");
             return;
         }
 
@@ -121,12 +122,12 @@ document.addEventListener("DOMContentLoaded", () =>  {
             });
 
             if (response.status === 204) {
-                alert("Код підтвердження надіслано повторно.");
+                alert("Verification code resent.");
                 startCooldown(cooldown);
                 return;
             } else {
                 const result = await response.json();
-                alert(result.message || "Не вдалося надіслати код.");
+                alert(result.message || "Failed to resend code.");
                 console.log(result);
             }
 

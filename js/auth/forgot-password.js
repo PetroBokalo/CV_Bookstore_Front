@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 console.log(result);
                 sessionStorage.setItem("userEmail", email);
 
-                window.location.href = "forgot-passwordCheckEmail.html";
+                window.location.href = "/pages/auth/forgot-passwordCheckEmail.html";
 
             }
             else {

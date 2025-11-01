@@ -11,7 +11,6 @@ document.getElementById("signinForm").addEventListener("submit", async function 
     const data = {
         email: document.getElementById("signinEmail").value,
         password: document.getElementById("signinPassword").value,
-        rememberMe: document.getElementById("rememberMe").checked
     };
 
 

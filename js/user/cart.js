@@ -1,48 +1,40 @@
 import { apiFetch } from "/js/api/api.js";
 
+import { toLoginPage } from "/js/api/api.js";
+import { toVerifyPage } from "/js/api/api.js";
 
-document.addEventListener("DOMContentLoaded", () =>  {
+async function loadCartData() {
+    const container = document.getElementById("cartData");
+    container.style.display = "none"; // приховуємо до завантаження
 
-document.getElementById("loadCart").addEventListener("click", async function () {
 
     try {
-
         const response = await apiFetch("/Cart/temp", {
             method: "GET",
-            headers: { 
-                "Content-Type": "application/json",
-            }
+            headers: { "Content-Type": "application/json" }
         });
 
         if (response.ok) {
-            const data = await response.json();  
+            const data = await response.json();
             console.log("Backend sends email:", data);
-
-            sessionStorage.setItem("userEmail", data.email); // зберігаємо в sessionStorage
-            console.log("Loggined at:", data.email);
-
-            console.log("Redirecting to cart.html in 2 seconds...");
-            
-            setTimeout(() => {
-                window.location.href = "/pages/user/cart.html"; // перенаправляємо в новому вікні
-            }, 2000); // затримка 2 секунди
-
+            container.textContent = `User email: ${data.email}`;
+            container.style.display = "block"; // показуємо лише після успішного завантаження
         } else if (response.status === 401) {
-            alert("Unauthorized. Please log in.");
+            toLoginPage("/pages/user/cart.html");
         } else if (response.status === 403) {
-            alert("Not verified. Please verify your email.");
+            toVerifyPage("/pages/user/cart.html");
         } else {
             const err = await response.text();
-            alert("Error: " + err);
+            container.textContent = "Error: " + err;
             console.error(err);
         }
 
-    }
-    catch (error) {
+    } catch (error) {
+        container.textContent = "Server error";
         console.error("Error:", error);
-        alert("Server error");
     }
-});
+}
 
+document.addEventListener("DOMContentLoaded", () => {
+    loadCartData(); // виконуємо одразу при завантаженні сторінки
 });
-

@@ -17,6 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 console.log("✅ Logged out successfully");
            } 
            else {
+               removeToken();
                console.error("Logout failed");
            }
        } 

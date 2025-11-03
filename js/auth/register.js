@@ -51,3 +51,8 @@ document.getElementById("signupForm").addEventListener("submit", async function 
         alert("Server error");
     }
 });
+
+document.getElementById("toLogin").addEventListener("click", function (event) {
+    event.preventDefault();
+    window.location.replace("/pages/auth/login.html");
+});

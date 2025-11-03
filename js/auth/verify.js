@@ -1,6 +1,8 @@
 
 import { apiFetch } from "/js/api/api.js";
 
+import { fromVerifyPage } from "/js/api/api.js";
+
 document.addEventListener("DOMContentLoaded", () =>  {
 
     const emailElement = document.getElementById("userEmail");
@@ -85,10 +87,10 @@ document.addEventListener("DOMContentLoaded", () =>  {
                 alert("Email verified successfully!");
                 console.log(response);
 
-                sessionStorage.removeItem("id");
                 sessionStorage.removeItem("email");
 
-                window.location.href = "/index.html";
+               fromVerifyPage();
+
             } else if (response.status === 401 ) {
 
                 console.warn("Unauthorized access - need login.");

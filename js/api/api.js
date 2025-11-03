@@ -3,6 +3,11 @@ import { getToken } from "/js/utils/accessTokenHandler.js";
 import { setToken } from "/js/utils/accessTokenHandler.js";
 import { removeToken } from "/js/utils/accessTokenHandler.js";
 
+import { setUserDestination } from "/js/utils/UserDestinationStorage.js";
+import { getUserDestination } from "/js/utils/UserDestinationStorage.js";
+import { removeUserDestination } from "/js/utils/UserDestinationStorage.js";
+
+
 
 const API_BASE_URL = "https://localhost:7012/api";
 
@@ -59,5 +64,52 @@ export async function apiFetch (endpoint, options = {})
         console.error("Fetch error:", error);
     }
 
+    
+}
+
+
+export function toLoginPage(destination) 
+{
+    if(destination) {
+        setUserDestination(destination);
+    }
+
+    window.location.replace("/pages/auth/login.html");
+}
+
+export function fromLoginPage()
+{
+    const destination = getUserDestination();
+    if (destination) 
+    {
+        removeUserDestination();
+        window.location.replace(destination);
+    }
+    else
+    {
+        window.location.replace("/index.html");
+    }
+    
+}
+
+export function toVerifyPage(destination) 
+{
+    setUserDestination(destination);
+
+    window.location.replace("/pages/auth/verify.html");
+}
+
+export function fromVerifyPage()
+{
+    const destination = getUserDestination();
+    if (destination) 
+    {
+        removeUserDestination();
+        window.location.replace(destination);
+    }
+    else
+    {
+        window.location.replace("/index.html");
+    }
     
 }

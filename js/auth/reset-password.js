@@ -38,11 +38,11 @@ document.addEventListener("DOMContentLoaded", () => {
             if (response.ok) {
                 alert("Password reset successfully!");
                 console.log("Password reset successfully!");
-                window.location.href = "reset-passwordClosePage.html";
+                window.location.replace("reset-passwordClosePage.html");
             } else {
-                const result = await response.json();
-                alert(result.message || "Password reset failed");
+                const result = await response.json();               
                 console.log(result);
+                window.location.replace("reset-passwordExpiredClosePage.html");
             }
         } catch (error) {
             console.error("Error:", error);

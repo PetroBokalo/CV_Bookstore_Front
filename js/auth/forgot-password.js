@@ -47,6 +47,15 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 
+    document.getElementById("backLink").addEventListener("click", function (event) {
+        event.preventDefault();
+
+        if (document.referrer) {
+            window.location.replace(document.referrer);
+        } else {
+            window.location.replace("/pages/auth/login.html");
+        }
+    });
 
 
 });

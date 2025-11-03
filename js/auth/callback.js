@@ -1,5 +1,7 @@
 import { setToken } from "/js/utils/accessTokenHandler.js";
 
+import { fromLoginPage } from "/js/api/api.js";
+
 document.addEventListener("DOMContentLoaded", () => {
     const hash = window.location.hash;
     if (hash) {
@@ -13,5 +15,5 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    window.location.href = "/index.html";
+    fromLoginPage();
 });

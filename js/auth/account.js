@@ -16,7 +16,6 @@ document.addEventListener("DOMContentLoaded", () => {
       // або можна показати offcanvas / modal з даними користувача
     } else {
       // 🚫 користувач не ввійшов
-      //window.location.href = "/pages/auth/login.html";
 
       window.location.href = "/pages/auth/login.html"; 
 

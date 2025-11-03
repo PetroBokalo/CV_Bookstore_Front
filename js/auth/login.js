@@ -1,6 +1,11 @@
 import { setToken } from "/js/utils/accessTokenHandler.js";
 import { getBaseUrl } from "/js/api/api.js";
 
+import { fromLoginPage } from "/js/api/api.js";
+import { toVerifyPage } from "/js/api/api.js";
+
+
+
 const baseUrl = getBaseUrl();
 
 document.getElementById("signinForm").addEventListener("submit", async function (event) 
@@ -30,14 +35,14 @@ document.getElementById("signinForm").addEventListener("submit", async function 
             console.log(result);
             setToken(result.accessToken);
 
-            // TODO:return to previous page
-            window.location.href = "/index.html";
+            fromLoginPage();
 
         }else if (response.status === 403){
             console.log(result);
             sessionStorage.setItem("email", result.data.email);
+            setToken(result.data.accessToken);
 
-            window.location.href = "/pages/auth/verify.html";
+            toVerifyPage();
         }
         else{
             alert("Login failed");
@@ -51,4 +56,15 @@ document.getElementById("signinForm").addEventListener("submit", async function 
         alert("Server error");
     }
 
+});
+
+document.getElementById("toRegister").addEventListener("click", function (event) {
+    event.preventDefault();
+    window.location.replace("/pages/auth/register.html");
+});
+
+document.getElementById("toForget-password").addEventListener("click", function (event) {
+    event.preventDefault();
+    
+    window.location.replace("/pages/auth/forgot-password.html");
 });

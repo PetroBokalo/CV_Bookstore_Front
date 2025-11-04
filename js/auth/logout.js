@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
                credentials: "include"
            });
            if (response.ok) {
-               //window.location.href = "../../index.html";
+
                 removeToken();
                 console.log("✅ Logged out successfully");
            } 
@@ -22,7 +22,9 @@ document.addEventListener("DOMContentLoaded", () => {
            }
        } 
        catch (error) {
+
            console.error("Error:", error);
+           window.location.replace("/pages/server-error.html");
        }
    });
 });

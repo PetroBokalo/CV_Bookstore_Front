@@ -3,6 +3,8 @@ import { apiFetch } from "/js/api/api.js";
 
 import { fromVerifyPage } from "/js/api/api.js";
 
+import { showError, hideError } from "/js/utils/errorHandler.js";
+
 document.addEventListener("DOMContentLoaded", () =>  {
 
     const emailElement = document.getElementById("userEmail");
@@ -75,6 +77,8 @@ document.addEventListener("DOMContentLoaded", () =>  {
 
         try {
 
+            hideError("verifyError");
+
             const response = await apiFetch("/Auth/verify", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -84,7 +88,7 @@ document.addEventListener("DOMContentLoaded", () =>  {
 
 
             if (response.ok) {           
-                alert("Email verified successfully!");
+
                 console.log(response);
 
                 sessionStorage.removeItem("email");
@@ -96,16 +100,26 @@ document.addEventListener("DOMContentLoaded", () =>  {
                 console.warn("Unauthorized access - need login.");
 
                 window.location.href = "/pages/auth/login.html";
-            }
-            else {
+
+            } else if (response.status === 500) {
+
                 const result = await response.json();
-                alert(result.message || "Verification failed");
+                console.log(result);
+
+                window.location.replace("/pages/server-error.html");
+
+            } else {
+
+                const result = await response.json();
+                showError("verifyError", result.message || "Verification failed");
                 console.log(result);
             }
         }
         catch (error) {
+
             console.error("Error:", error);
-            alert("Server error");
+            window.location.replace("/pages/server-error.html");
+
         }
 
     });
@@ -120,24 +134,28 @@ document.addEventListener("DOMContentLoaded", () =>  {
             const response = await apiFetch("/Auth/resend", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                credentials: 'include' // Додає кукі до запиту
+                credentials: 'include' 
             });
 
             if (response.status === 204) {
-                alert("Verification code resent.");
+
                 startCooldown(cooldown);
                 return;
+
             } else {
+                
                 const result = await response.json();
-                alert(result.message || "Failed to resend code.");
+                showError("verifyError", result.message || "Failed to resend code.");
                 console.log(result);
             }
 
 
         } 
         catch (error) {
+
             console.error("Error:", error);
-            alert("Server error");
+            window.location.replace("/pages/server-error.html");
+
         }
     });
 

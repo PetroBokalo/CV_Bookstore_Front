@@ -4,9 +4,10 @@ import { getBaseUrl } from "/js/api/api.js";
 import { fromLoginPage } from "/js/api/api.js";
 import { toVerifyPage } from "/js/api/api.js";
 
-
+import { showError, hideError } from "/js/utils/errorHandler.js";
 
 const baseUrl = getBaseUrl();
+
 
 document.getElementById("signinForm").addEventListener("submit", async function (event) 
 {
@@ -21,6 +22,8 @@ document.getElementById("signinForm").addEventListener("submit", async function 
 
     try {
 
+        hideError("signinError");
+
         const response = await fetch(`${baseUrl}/Auth/login`,{
             method: "POST",
             headers: {"content-type": "application/json"},
@@ -31,7 +34,6 @@ document.getElementById("signinForm").addEventListener("submit", async function 
         const result = await response.json();
 
         if (response.ok){          
-            alert("Login successful");
             console.log(result);
             setToken(result.accessToken);
 
@@ -43,17 +45,27 @@ document.getElementById("signinForm").addEventListener("submit", async function 
             setToken(result.data.accessToken);
 
             toVerifyPage();
-        }
-        else{
-            alert("Login failed");
+        }else if (response.status === 401){
+
             console.log(result);
+
+            showError("signinError", result?.message || "Invalid email or password.");
+
+
+        }else if (response.status === 500){
+            console.log(result);
+            window.location.replace("/pages/server-error.html");
+        }
+        else {
+            console.log(result);
+            alert("An unexpected error occurred. Please try again later.");
         }
 
 
     }
     catch (error) {
         console.error("Error:", error);
-        alert("Server error");
+        window.location.replace("/pages/server-error.html");
     }
 
 });

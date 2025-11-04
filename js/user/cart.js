@@ -27,11 +27,13 @@ async function loadCartData() {
             const err = await response.text();
             container.textContent = "Error: " + err;
             console.error(err);
+            window.location.replace("/pages/server-error.html");
         }
 
     } catch (error) {
         container.textContent = "Server error";
         console.error("Error:", error);
+        window.location.replace("/pages/server-error.html");
     }
 }
 

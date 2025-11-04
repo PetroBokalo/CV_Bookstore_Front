@@ -32,16 +32,25 @@ document.addEventListener("DOMContentLoaded", () => {
                 window.location.href = "/pages/auth/forgot-passwordCheckEmail.html";
 
             }
-            else {
-                alert(result.message || "Verification failed");
+            else if (response.status === 500) {
+
                 console.log(result);
+                window.location.replace("/pages/server-error.html");
+
+            } else {
+
+                alert(result.message || "Password reset failed");
+                console.log(result);
+
             }
 
 
         }
         catch (error) {
+
             console.error("Error:", error);
-            alert("Server error");
+            window.location.replace("/pages/server-error.html");
+            
         }
 
     });

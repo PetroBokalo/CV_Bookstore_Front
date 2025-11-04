@@ -1,4 +1,7 @@
 import { getBaseUrl } from "/js/api/api.js";
+
+import { showError, hideError } from "/js/utils/errorHandler.js";
+
 const baseUrl = getBaseUrl();
 
 
@@ -19,7 +22,9 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         if (password !== confirmPassword) {
-            alert("Passwords do not match.");
+
+            showError("passwordError","Passwords do not match.");
+            showError("confirmPasswordError","Passwords do not match.");
             return;
         }
 
@@ -29,6 +34,10 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         try {
+
+            hideError("passwordError");
+            hideError("confirmPasswordError");
+
             const response = await fetch(`${baseUrl}/Auth/reset-password`, {
                 method: "PUT",
                 headers: { "content-type": "application/json" },
@@ -36,17 +45,28 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         
             if (response.ok) {
-                alert("Password reset successfully!");
+               
                 console.log("Password reset successfully!");
-                window.location.replace("reset-passwordClosePage.html");
-            } else {
+                window.location.replace("/pages/auth//reset-passwordClosePage.html");
+
+            } else if (response.status === 500){
+
                 const result = await response.json();               
                 console.log(result);
-                window.location.replace("reset-passwordExpiredClosePage.html");
+                window.location.replace("/pages/server-error.html");
+
+            } else {
+
+                const result = await response.json();               
+                console.log(result);
+                window.location.replace("/pages/auth/reset-passwordExpiredClosePage.html");
             }
+            
         } catch (error) {
+
             console.error("Error:", error);
-            alert("Server error");
+            window.location.replace("/pages/server-error.html");
+
         }
     });
 });

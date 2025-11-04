@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", () =>  {
                 console.error("Error Phone number providing:", result);
             }
             else {
-                alert("Phone number provided successfully!");
+
                 console.log("Phone number provided");
 
                 fromLoginPage();
@@ -60,8 +60,10 @@ document.addEventListener("DOMContentLoaded", () =>  {
 
         }
         catch (error) {
+
             console.error("Error:", error);
-            alert("Server error");
+            window.location.replace("/pages/server-error.html");
+
         }
 
 

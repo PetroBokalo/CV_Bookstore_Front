@@ -3,7 +3,7 @@ import { apiFetch } from "/js/api/api.js";
 import { removeToken } from "/js/utils/accessTokenHandler.js";
 
 document.addEventListener("DOMContentLoaded", () => {
-    const logoutButton = document.getElementById("icon-facebook");
+    const logoutButton = document.getElementById("logout");
    logoutButton.addEventListener("click", async () => {
        try {
            const response = await apiFetch("/auth/logout", {
@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 removeToken();
                 console.log("✅ Logged out successfully");
+                window.location.reload();
            } 
            else {
                removeToken();

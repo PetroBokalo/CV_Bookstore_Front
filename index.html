@@ -53,8 +53,8 @@
 						</div>
 					</div>
 					<div class="col-md-4 text-end">
-						<a id="accountButton" class="user-account for-buy" data-bs-toggle="offcanvas" role ="button" aria-controls="accountPanel">
-							<i class="icon icon-user"></i><span>Account</span>
+						<a id="accountButton" class="user-account for-buy"  role ="button" aria-controls="accountPanel">
+							<i class="icon icon-user"></i><span>Sign in</span>
 						</a>
 						<a href="/pages/user/cart.html" id="loadCart" class="cart for-buy"><i class="icon icon-clipboard"></i><span>Cart:(0 $)</span></a>
 					</div>
@@ -1036,88 +1036,21 @@
 		</div>
 	</div>
 
-<!-- Account Sidebar -->
-<div class="offcanvas offcanvas-end" tabindex="-1" id="accountPanel" aria-labelledby="accountPanelLabel">
-  <div class="offcanvas-header justify-content-end">
-    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+
+
+<!-- Account panel (Bootstrap Offcanvas) -->
+<div class="offcanvas offcanvas-end" tabindex="-1" id="accountPanel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title">My Account</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
   <div class="offcanvas-body">
-
-    <!-- Tab Content -->
-    <div class="tab-content" id="accountTabContent">
-
-      <!-- Sign in -->
-      <div class="tab-pane fade show active" id="signin" role="tabpanel">
-        <h4 class="mb-3">Sign in</h4>
-        <form id="signinForm">
-          <div class="mb-3">
-            <label for="signinEmail" class="form-label">Email</label>
-            <input type="email" class="form-control" id="signinEmail" placeholder="Enter your email">
-          </div>
-          <div class="mb-3">
-            <label for="signinPassword" class="form-label">Password</label>
-            <input type="password" class="form-control" id="signinPassword" placeholder="Enter your password">
-          </div>
-          <div class="d-flex justify-content-between align-items-center mb-3">
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="rememberMe">
-              <label class="form-check-label" for="rememberMe">Remember me</label>
-            </div>
-            <a href="pages/auth/forgot-password.html" class="text-decoration-none">Forgot password?</a>
-          </div>
-          <button type="submit" class="btn btn-primary w-100 mb-2">Sign in</button>
-          <button id="googleSignInBtn" type="button" class="btn btn-outline-danger w-100 mb-3">
-            <i class="bi bi-google"></i> Sign in with Google
-          </button>
-          <div class="text-center">
-            <span>Don’t have an account? </span>
-            <a href="#" id="showSignup" class="text-decoration-none">Sign up</a>
-          </div>
-        </form>
-      </div>
-
-      <!-- Sign up -->
-      <div class="tab-pane fade" id="signup" role="tabpanel">
-        <h4 class="mb-3">Sign up</h4>
-        <form id="signupForm">
-          <div class="mb-3">
-            <label for="signupFirstName" class="form-label">First Name</label>
-            <input type="text" class="form-control" id="signupFirstName" placeholder="Enter your first name">
-          </div>
-          <div class="mb-3">
-            <label for="signupLastName" class="form-label">Last Name</label>
-            <input type="text" class="form-control" id="signupLastName" placeholder="Enter your last name">
-          </div>
-          <div class="mb-3">
-            <label for="signupPhone" class="form-label">Phone Number</label>
-            <input type="tel" class="form-control" id="signupPhone" placeholder="+380 00 000 0000">
-          </div>
-          <div class="mb-3">
-            <label for="signupEmail" class="form-label">Email</label>
-            <input type="email" class="form-control" id="signupEmail" placeholder="Enter your email">
-          </div>
-          <div class="mb-3">
-            <label for="signupPassword" class="form-label">Password</label>
-            <input type="password" class="form-control" id="signupPassword" placeholder="Enter your password">
-          </div>
-          <div class="mb-3">
-            <label for="signupConfirmPassword" class="form-label">Confirm Password</label>
-            <input type="password" class="form-control" id="signupConfirmPassword" placeholder="Confirm your password">
-          </div>
-          <button type="submit" class="btn btn-primary w-100 mb-2">Sign up</button>
-          <button id="googleSignUpBtn" type="button" class="btn btn-outline-danger w-100 mb-3">
-            <i class="bi bi-google"></i> Sign up with Google
-          </button>
-          <div class="text-center">
-            <span>Already have an account? </span>
-            <a href="#" id="showSignin" class="text-decoration-none">Sign in</a>
-          </div>
-        </form>
-      </div>
-
-    </div>
+    <p>Welcome, <span id="userName"></span>!</p>
+    <hr>
+    <button class="btn btn-outline-danger w-100" id="logout">Log out</button>
   </div>
 </div>
+
 
 	<script src="js/jquery-1.11.0.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"

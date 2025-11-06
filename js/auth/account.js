@@ -47,16 +47,16 @@ document.addEventListener("DOMContentLoaded", async () => {
       offcanvas.show();
       break;
 
-    case 401:
-      toLoginPage();
-      break;
-
     case 403:
       toVerifyPage();
       break;
+
+    case 500:
+      window.location.replace("/pages/server-error.html");
+      break;
     
     default:
-      alert("Server error account.js");
+      toLoginPage();
       break;
    }
 

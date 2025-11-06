@@ -1,0 +1,19 @@
+.card {
+  border: none;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.btn-primary {
+  transition: background-color 0.3s ease, transform 0.2s ease; /* плавний перехід кольору та невелике збільшення */
+}
+
+.btn-primary:hover {
+  filter: brightness(0.9); /* робить кнопку трохи темнішою при наведенні */
+}
+
+#emailError {
+  margin-top: 0;      /* прибирає зайвий відступ зверху */
+  margin-bottom: 0;   /* (опціонально) щоб не було відступу знизу */
+}
